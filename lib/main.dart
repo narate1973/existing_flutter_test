@@ -43,15 +43,11 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> tiles = [
     Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ColorfulTile(
-        key: UniqueKey(),
-      ),
+      child: ColorfulTile(),
     ),
     Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ColorfulTile(
-        key: UniqueKey(),
-      ),
+      child: ColorfulTile(),
     ),
   ];
 

@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
 
 part 'increment_event.dart';

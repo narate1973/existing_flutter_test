@@ -16,88 +16,76 @@ class _SecondPageState extends State<SecondPage> {
     showDialog(
       context: context,
       builder: (_) {
-        return BlocProvider.value(
-          value: BlocProvider.of<Increment2Bloc>(context),
-          child: AlertDialog(
-            content: BlocBuilder<Increment2Bloc, Increment2State>(
-              builder: (context, state) {
-                return Text(
-                  'page 2 num : ${state.number}',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                );
-              },
-            ),
+        return AlertDialog(
+          content: BlocBuilder<Increment2Bloc, Increment2State>(
+            builder: (context, state) {
+              return Text(
+                'page 2 num : ${state.number}',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              );
+            },
           ),
         );
       },
     );
   }
 
-  void _gotToThirdPage(context) => Navigator.of(context).push(MaterialPageRoute(
-      builder: (_) => BlocProvider.value(
-            value: BlocProvider.of<Increment2Bloc>(context),
-            child: ThirdPage(),
-          )));
+  void _gotToThirdPage(context) => Navigator.of(context)
+      .push(MaterialPageRoute(builder: (_) => ThirdPage()));
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<Increment2Bloc>(
       create: (context) => Increment2Bloc(),
-      child: Builder(
-        builder: (context) {
-          return Scaffold(
-            backgroundColor: Colors.grey,
-            appBar: AppBar(
-              title: Text('existing test no.2'),
-            ),
-            body: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  BlocBuilder<IncrementBloc, IncrementState>(
-                    builder: (context, state) {
-                      return Text(
-                        'page 1 num : ${state.number}',
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                      );
-                    },
-                  ),
-                  BlocBuilder<Increment2Bloc, Increment2State>(
-                    builder: (context, state) {
-                      return Text(
-                        'page 2 num : ${state.number}',
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                      );
-                    },
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      _shoeModal(context);
-                    },
-                    child: const Text('show bottom sheet'),
-                    color: Colors.white,
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      _gotToThirdPage(context);
-                    },
-                    child: const Text('go to third page'),
-                    color: Colors.white,
-                  )
-                ],
+      child: Scaffold(
+        backgroundColor: Colors.grey,
+        appBar: AppBar(
+          title: Text('existing test no.2'),
+        ),
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              BlocBuilder<IncrementBloc, IncrementState>(
+                builder: (context, state) {
+                  return Text(
+                    'page 1 num : ${state.number}',
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  );
+                },
               ),
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                BlocProvider.of<Increment2Bloc>(context).add(Increment2Added());
-              },
-              child: Icon(Icons.plus_one),
-            ),
-          );
-        },
+              BlocBuilder<Increment2Bloc, Increment2State>(
+                builder: (context, state) {
+                  return Text(
+                    'page 2 num : ${state.number}',
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  );
+                },
+              ),
+              MaterialButton(
+                onPressed: () {
+                  _shoeModal(context);
+                },
+                child: const Text('show bottom sheet'),
+                color: Colors.white,
+              ),
+              MaterialButton(
+                onPressed: () {
+                  _gotToThirdPage(context);
+                },
+                child: const Text('go to third page'),
+                color: Colors.white,
+              )
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            BlocProvider.of<Increment2Bloc>(context).add(Increment2Added());
+          },
+          child: Icon(Icons.plus_one),
+        ),
       ),
     );
   }
